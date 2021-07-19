@@ -20,6 +20,8 @@ namespace FreeCourse.IdentityServer
 
                 new ApiResource("resource_basket"){Scopes={"basket_fullpermission"}},
 
+                new ApiResource("resource_discount"){Scopes={"discount_fullpermission"}},
+
                 new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -47,6 +49,8 @@ namespace FreeCourse.IdentityServer
 
                 new ApiScope("basket_fullpermission","Full Permission for Basket API"),
 
+                new ApiScope("discount_fullpermission","Full Permission for Discount API"),
+
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -69,7 +73,7 @@ namespace FreeCourse.IdentityServer
                     AllowOfflineAccess=true,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                    AllowedScopes = {"basket_fullpermission", IdentityServerConstants.StandardScopes.Email, IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName, "roles" },
+                    AllowedScopes = {"basket_fullpermission", "discount_fullpermission", IdentityServerConstants.StandardScopes.Email, IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName, "roles" },
                     AccessTokenLifetime=1*60*60,
                     RefreshTokenExpiration=TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds,
