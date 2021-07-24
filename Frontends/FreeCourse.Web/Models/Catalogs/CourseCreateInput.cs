@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,5 +26,8 @@ namespace FreeCourse.Web.Models.Catalogs
         public string CategoryId { get; set; }
 
         public FeatureViewModel Feature { get; set; }
+
+        [Display(Name="Course Photo")]
+        public IFormFile PhotoFormFile { get; set; }
     }
 }
