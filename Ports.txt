@@ -8,4 +8,6 @@ Services
 
 IdentityServer => 5001
 
+Web => 5010
+
 Gateway => 5000
