@@ -8,7 +8,6 @@ namespace FreeCourse.Web.Models
 {
     public class FeatureViewModel
     {
-        [Required]
         public int Duration { get; set; }
     }
 }

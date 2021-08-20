@@ -14,18 +14,14 @@ namespace FreeCourse.Web.Models.Catalogs
 
         public string UserId { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
-        [Required]
         public string Description { get; set; }
 
-        [Required]
         public decimal Price { get; set; }
 
         public string Picture { get; set; }
 
-        [Required]
         public string CategoryId { get; set; }
 
         public FeatureViewModel Feature { get; set; }
