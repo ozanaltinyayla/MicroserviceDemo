@@ -31,20 +31,28 @@ namespace FreeCourse.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckOut(CheckOutInfoInput checkOutInfoInput)
         {
-            var orderStatus = await _orderService.CreateOrder(checkOutInfoInput);
+            //Synchronous Connection
+            //var orderStatus = await _orderService.CreateOrder(checkOutInfoInput);
 
-            if (!orderStatus.IsSuccessfull)
+            //Asynchronous Connection
+            var orderSuspend = await _orderService.SuspendOrder(checkOutInfoInput);
+
+            if (!orderSuspend.IsSuccessfull)
             {
                 var basket = await _basketService.Get();
 
                 ViewBag.basket = basket;
 
-                ViewBag.error = orderStatus.Error;
+                ViewBag.error = orderSuspend.Error;
 
                 return View();
             }
 
-            return RedirectToAction(nameof(SuccessfulCheckOut), new { orderId = orderStatus.OrderId });
+            //Synchronous Connection
+            //return RedirectToAction(nameof(SuccessfulCheckOut), new { orderId = orderStatus.OrderId });
+
+            //Asynchronous Connection
+            return RedirectToAction(nameof(SuccessfulCheckOut), new { orderId = new Random().Next(1, 1000) });
         }
 
         public IActionResult SuccessfulCheckOut(int orderId)
@@ -52,6 +60,11 @@ namespace FreeCourse.Web.Controllers
             ViewBag.orderId = orderId;
 
             return View();
+        }
+
+        public async Task<IActionResult> CheckOutHistory()
+        {
+            return View(await _orderService.GetOrders());
         }
     }
 }
